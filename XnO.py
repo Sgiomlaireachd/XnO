@@ -14,7 +14,6 @@ def getTransposed(matrix):
     return res
 
 def botStep(matrix):
-    xCount = 0
     # CHECK FOR HUMAN WIN (HORIZONTAL)
     for i in range(len(matrix)):
         if matrix[i].count('O') == 2 and matrix[i].count('.') == 1:
@@ -25,8 +24,8 @@ def botStep(matrix):
         if matrix[i].count('X') == 2 and matrix[i].count('.') == 1:
             print("predicted horizontal.")
             return [i,matrix[i].index('.')]
-    matrix1 = getTransposed(matrix)
     # CHECK FOR HUMAN WIN (VERTICAL)
+    matrix1 = getTransposed(matrix)
     for i in range(len(matrix1)):
         if matrix1[i].count('O') == 2 and matrix1[i].count('.') == 1:
             print("won vertical.")
@@ -36,16 +35,13 @@ def botStep(matrix):
         if matrix1[i].count('X') == 2 and matrix1[i].count('.') == 1:
             print("predicted vertical.")
             return [matrix1[i].index('.'),i]
-    list = []
     # PREDICT DIAGONAL:
+    list = []
     for i in range(len(matrix)):
         list.append(matrix[i][i])
     if list.count('O') == 2 and list.count('.') == 1:
         print("won diagonal.")
         return [list.index('.'),list.index('.')]
-    list=[]
-    for i in range(len(matrix)):
-        list.append(matrix[i][i])
     if list.count('X') == 2 and list.count('.') == 1:
         print("predicted diagonal.")
         return [list.index('.'),list.index('.')]
@@ -58,14 +54,10 @@ def botStep(matrix):
     if l.count('O') == 2 and l.count('.') == 1:
         print("won revere diagonal.")
         return [l.index('.'),len(matrix) - l.index('.') - 1]
-    l = []
-    for i in range(len(matrix)):
-        for j in range(len(matrix[i])):
-            if j == len(matrix) - i - 1:
-                l.append(matrix[i][j])
     if l.count('X') == 2 and l.count('.') == 1:
         print("predicted revere diagonal.")
         return [l.index('.'),len(matrix) - l.index('.') - 1]
+    # IF HUMAN CAN`T WIN AND BOT CAN`T WIN, BOT MAKES RANDOM MOVE:
     s = 3
     while(s != ''):
         s = [R.randint(0,2),R.randint(0,2)]
@@ -108,20 +100,20 @@ def Print(m):
         for j in i:
             print(j,end="\t")
         print()
-matrix=[['.' for i in range(3)] for j in range(3)]
-Print(matrix)
-step = 0
-while(checkWin(matrix) == 'D'):
-    print("HUMAN:")
-    step = [-1,-1]
-    while(not checkHUmanStep(matrix,step)):
-        step = [int(input("Input step i:")),int(input("Input step j:"))]
-        if(not checkHUmanStep(matrix,step)): print("Invalid step.")
-    matrix[step[0]][step[1]] = 'X'
-    if not checkFull(matrix) :
+def main():
+    matrix=[['.' for i in range(3)] for j in range(3)]
+    step = 0
+    while(checkWin(matrix) == 'D'):
         Print(matrix)
-        break
-    botstep = botStep(matrix)
-    matrix[botstep[0]][botstep[1]] = 'O'
-    Print(matrix)
-print("Result:", checkWin(matrix))
+        step = [-1,-1]
+        while(not checkHUmanStep(matrix,step)):
+            step = [int(input("Input step i:")),int(input("Input step j:"))]
+            if(not checkHUmanStep(matrix,step)): print("Invalid step.")
+        matrix[step[0]][step[1]] = 'X'
+        if not checkFull(matrix) :
+            Print(matrix)
+            break
+        botstep = botStep(matrix)
+        matrix[botstep[0]][botstep[1]] = 'O'
+    print("Result:", checkWin(matrix))
+if __name__ == "__main__": main()
