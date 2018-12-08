@@ -1,17 +1,17 @@
 import random as R
-def checkHUmanStep(matrix,step):
-        if step[0] >=0 and step[0] < 3 and step[1] >= 0 and step[1] < 3:
-            if matrix[step[0]][step[1]] == '.':
-                return True
-        return False
-def getTransposed(matrix):
-    res = []
-    for i in range(len(matrix)):
-        r = []
-        for j in range(len(matrix[i])):
-            r.append(matrix[j][i])
-        res.append(r)
-    return res
+# def checkHUmanStep(matrix,step):
+#         if step[0] >=0 and step[0] < 3 and step[1] >= 0 and step[1] < 3:
+#             if matrix[step[0]][step[1]] == '.':
+#                 return True
+#         return False
+# def getTransposed(matrix):
+#     res = []
+#     for i in range(len(matrix)):
+#         r = []
+#         for j in range(len(matrix[i])):
+#             r.append(matrix[j][i])
+#         res.append(r)
+#     return res
 
 def botStep(matrix):
     # CHECK FOR HUMAN WIN (HORIZONTAL)
@@ -63,43 +63,43 @@ def botStep(matrix):
         s = [R.randint(0,2),R.randint(0,2)]
         if matrix[s[0]][s[1]] == '.':
             return s
-def checkWin(matrix):
-    # HORIZONTAL:
-    for i in range(len(matrix)):
-        if matrix[i].count('X') == 3: return 'X'
-        if matrix[i].count('O') == 3: return 'O'
-    #VERTICAL:
-    matrix1 = getTransposed(matrix)
-    for i in range(len(matrix1)):
-        if matrix1[i].count('X') == 3: return 'X'
-        if matrix1[i].count('O') == 3: return 'O'
-    # DIAGONAL
-    l = []
-    for i in range(len(matrix)):
-        l.append(matrix[i][i])
-    if l.count('X') == 3: return 'X'
-    if l.count('O') == 3: return 'O'
-    # REVERSE DIAGONAL
-    l = []
-    for i in range(len(matrix)):
-        for j in range(len(matrix[i])):
-            if j == len(matrix) - i - 1:
-                l.append(matrix[i][j])
-    if l.count('X') == 3: return 'X'
-    if l.count('O') == 3: return 'O'
-    return 'D'
-def checkFull(matrix):
-    result = False
-    for i in matrix:
-        for j in i:
-            if j == '.': result = True
-    return result
+# def checkWin(matrix):
+#     # HORIZONTAL:
+#     for i in range(len(matrix)):
+#         if matrix[i].count('X') == 3: return 'X'
+#         if matrix[i].count('O') == 3: return 'O'
+#     #VERTICAL:
+#     matrix1 = getTransposed(matrix)
+#     for i in range(len(matrix1)):
+#         if matrix1[i].count('X') == 3: return 'X'
+#         if matrix1[i].count('O') == 3: return 'O'
+#     # DIAGONAL
+#     l = []
+#     for i in range(len(matrix)):
+#         l.append(matrix[i][i])
+#     if l.count('X') == 3: return 'X'
+#     if l.count('O') == 3: return 'O'
+#     # REVERSE DIAGONAL
+#     l = []
+#     for i in range(len(matrix)):
+#         for j in range(len(matrix[i])):
+#             if j == len(matrix) - i - 1:
+#                 l.append(matrix[i][j])
+#     if l.count('X') == 3: return 'X'
+#     if l.count('O') == 3: return 'O'
+#     return 'D'
+# def checkFull(matrix):
+#     result = False
+#     for i in matrix:
+#         for j in i:
+#             if j == '.': result = True
+#     return result
 
-def Print(m):
-    for i in m:
-        for j in i:
-            print(j,end="\t")
-        print()
+# def Print(m):
+#     for i in m:
+#         for j in i:
+#             print(j,end="\t")
+#         print()
 def main():
     matrix=[['.' for i in range(3)] for j in range(3)]
     step = 0
